@@ -1,7 +1,9 @@
 
 package com.cc.java;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -21,6 +23,22 @@ class Server {
      
        try (Socket client = serverSocket.accept()){
          output("message: " + client.toString());
+
+         InputStreamReader inputStream = new InputStreamReader(client.getInputStream());
+         BufferedReader bfReader = new BufferedReader(inputSream);
+         
+         StringBuilder request = new StringBuilder();
+
+         String tmpLine = bfReader.readLine(); // one Line
+         while (!tmpLine.isBlank()) { // Leerzeile als Trenner
+         request.append(tmpLine + "\r\n");
+         tmpLine = bfReader.readLine(); // zeile anhängen
+
+         // Request als String ... 
+         output("--> REQUEST: ");
+         output("--> " + request);
+}
+
       }
     }
 
