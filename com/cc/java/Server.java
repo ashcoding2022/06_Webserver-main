@@ -3,6 +3,7 @@ package com.cc.java;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 
 class Server {
 
@@ -15,7 +16,13 @@ class Server {
 
       while (true) {
         // Keep the Server alive! (durch Endlosschleife im speicher behalten)
+
+        
+     
+       try (Socket client = serverSocket.accept()){
+         output("message: " + client.toString());
       }
+    }
 
     } catch (IOException e) {
       // TODO Auto-generated catch block
